@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">QrCodeDemo</string>
+    <string name="close">关闭</string>
+    <string name="login_text1">你的账号20172030319尝试登陆管理系统,登陆地点杭州市。</string>
+    <string name="text2">如非本人操作，请点击右上角的关闭按钮。</string>
+    <string name="login_flag_title">登陆确认</string>
 </resources>

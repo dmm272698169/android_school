@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dommy.qrcode.util.Constant;
+import com.dommy.qrcode.util.Validator;
 import com.google.zxing.activity.CaptureActivity;
 import com.google.zxing.encoding.EncodingHandler;
 
@@ -98,11 +99,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == Constant.REQ_QR_CODE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString(Constant.INTENT_EXTRA_KEY_QR_SCAN);
-            Intent intent = new Intent();
-            intent.setAction("android.intent.action.VIEW");
-            Uri url = Uri.parse(scanResult);
-            intent.setData(url);
-            startActivity(intent);
+
+            if (Validator.isUrl(scanResult)){
+                //跳转默认浏览器
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri url = Uri.parse(scanResult);
+                intent.setData(url);
+                startActivity(intent);
+            }else{
+                Intent intent = new Intent(MainActivity.this, login_flag.class);
+                intent.putExtra("param",scanResult);
+                startActivityForResult(intent, Constant.REQ_QR_CODE);
+            }
+
+
+
 //            //将扫描出的信息显示出来
 //            tvResult.setText(scanResult);
         }
