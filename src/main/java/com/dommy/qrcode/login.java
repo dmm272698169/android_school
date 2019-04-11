@@ -11,7 +11,6 @@ import com.dommy.qrcode.util.Constant;
 import com.dommy.qrcode.util.Util;
 import com.dommy.qrcode.util.httpClient;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -74,6 +73,7 @@ public class login extends AppCompatActivity {
                         Log.i("网页信息",name);
                         Intent intent = new Intent(login.this, MainActivity.class);
                         startActivityForResult(intent, Constant.REQ_QR_CODE);
+                        finish();
                     }
                 }
             }

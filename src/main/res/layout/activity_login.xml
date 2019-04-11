@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <com.dommy.qrcode.others.CustomVideoView
+        android:id="@+id/videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"
@@ -69,8 +75,7 @@
             <ImageView
                 android:id="@+id/logo"
                 android:layout_alignWithParentIfMissing="false"
-                android:background="@android:color/white"
-                app:srcCompat="@drawable/tuoxiang"
+                app:srcCompat="@drawable/icon"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="21dp"

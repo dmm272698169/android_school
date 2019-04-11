@@ -18,7 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity" />
         <activity android:name="com.google.zxing.activity.CaptureActivity" />
         <activity android:name=".login">
             <intent-filter>
@@ -27,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bar_activity" />
         <activity android:name=".login_flag" />
     </application>
 

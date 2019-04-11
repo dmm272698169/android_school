@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent">\
+    <com.dommy.qrcode.others.CustomVideoView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -21,9 +24,11 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/login_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/close"
+        android:onClick="login_close"
         android:textColor="@android:color/white"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20sp"
@@ -34,8 +39,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_alignWithParentIfMissing="false"
-        android:background="@android:color/white"
-        app:srcCompat="@drawable/tuoxiang"
+        app:srcCompat="@drawable/icon"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="80dp"

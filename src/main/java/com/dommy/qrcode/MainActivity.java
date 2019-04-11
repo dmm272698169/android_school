@@ -3,31 +3,22 @@ package com.dommy.qrcode;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dommy.qrcode.util.Constant;
 import com.dommy.qrcode.util.Validator;
 import com.google.zxing.activity.CaptureActivity;
-import com.google.zxing.encoding.EncodingHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnQrCode,btn_gen; // 扫码
-    TextView tvResult; // 结果
-    private EditText etCode;//生成二维码的文本
-    private ImageView imgQRCode;//显示生成的二维码图像
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,31 +30,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         btnQrCode = (Button) findViewById(R.id.btn_qrcode);
         btnQrCode.setOnClickListener(this);
-        btn_gen=(Button)findViewById(R.id.btn_gen);
-        btn_gen.setOnClickListener(genOnClick);
-        etCode=(EditText) findViewById(R.id.et_code);
-        imgQRCode=(ImageView)findViewById(R.id.img_qrcode);
-        tvResult = (TextView) findViewById(R.id.txt_result);
     }
-    /**
-     * 生成二维码
-     */
-    private void startGen() {
-        String content = etCode.getText().toString();
-        if ("".equalsIgnoreCase(content)) {
-            Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
-        } else {
-            //调用工具类EncodingUtils生成二维码图片
-            Bitmap qrCode = EncodingHandler.createQRCode(content, 600, 600, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-            imgQRCode.setImageBitmap(qrCode);
+    // 用来计算返回键的点击间隔时间
+    private long exitTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                //弹出提示，可以有多种方式
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
         }
+
+        return super.onKeyDown(keyCode, event);
     }
-    private View.OnClickListener genOnClick=new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startGen();
-        }
-    };
     // 开始扫码
     private void startQrCode() {
         // 申请相机权限
@@ -111,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, login_flag.class);
                 intent.putExtra("param",scanResult);
                 startActivityForResult(intent, Constant.REQ_QR_CODE);
+                finish();
             }
 
 
