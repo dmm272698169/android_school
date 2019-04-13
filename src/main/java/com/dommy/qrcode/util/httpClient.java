@@ -32,7 +32,7 @@ public class httpClient {
             //设置请求体的类型是文本类型
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             //设置请求体的长度
-            httpURLConnection.setRequestProperty("Content-Length", String.valueOf(data.length));
+            httpURLConnection.setRequestProperty("Authorization","Basic a3FnbDprcWdsc2VjcmV0");
             //获得输出流，向服务器写入数据
             OutputStream outputStream = httpURLConnection.getOutputStream();
             outputStream.write(data);

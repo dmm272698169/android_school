@@ -42,6 +42,7 @@
                 android:layout_height="60dp"
                 android:inputType="textPassword"
                 android:ems="10"
+                android:text="123456"
                 android:id="@+id/login_edit_pwd"
                 android:drawableLeft="@android:drawable/ic_lock_idle_lock"
                 android:hint="请输入您的密码"
@@ -67,6 +68,7 @@
                 android:id="@+id/login_edit_account"
                 android:drawableLeft="@android:drawable/ic_menu_myplaces"
                 android:hint="请输入您的用户名"
+                android:text="20172030319"
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/logo"
                 android:layout_alignParentLeft="true"
@@ -78,7 +80,7 @@
                 app:srcCompat="@drawable/icon"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 

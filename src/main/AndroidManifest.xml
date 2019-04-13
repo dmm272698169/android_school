@@ -27,6 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".login_flag" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".AliHomeActivity"/>
+        <activity android:name=".ScrollingActivity"/>
     </application>
 
 </manifest>
