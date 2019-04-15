@@ -14,7 +14,8 @@ public class activity_qrcode_text extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_text);
-        qrcode_text.findViewById(R.id.qrcode_text);
+
+        qrcode_text=findViewById(R.id.qrcode_text);
         Intent intent=getIntent();
         String data = intent.getStringExtra("param");
         qrcode_text.setText(data);
