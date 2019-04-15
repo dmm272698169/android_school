@@ -85,6 +85,7 @@ public class login extends AppCompatActivity {
 //                                Util.insertSqlLite(login.this,(String) jsonObject.get("token"),account);
 //                            }
                             Util.saveUser(login.this,account,password);
+                            Util.getUser(login.this);
                             Log.i("网页信息",jsonObject.get("token").toString());
                             Intent intent = new Intent(login.this,AliHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -94,7 +95,6 @@ public class login extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }

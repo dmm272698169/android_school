@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 import com.dommy.qrcode.util.Constant;
 import com.dommy.qrcode.util.Validator;
 import com.google.zxing.activity.CaptureActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnQrCode,btn_gen; // 扫码
@@ -85,7 +89,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bundle bundle = data.getExtras();
             assert bundle != null;
             String scanResult = bundle.getString(Constant.INTENT_EXTRA_KEY_QR_SCAN);
-
+            JSONObject jsonObject=null;
+            try {
+                jsonObject=new JSONObject(scanResult);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             if (Validator.isUrl(scanResult)){
                 //跳转默认浏览器
                 Intent intent = new Intent();
@@ -93,8 +102,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Uri url = Uri.parse(scanResult);
                 intent.setData(url);
                 startActivity(intent);
-            }else{
+            }else if(scanResult.contains("loginUrl") && scanResult.contains("uid")){
                 Intent intent = new Intent(MainActivity.this, login_flag.class);
+                intent.putExtra("param",scanResult);
+                Log.i("返回数据",scanResult);
+                startActivityForResult(intent, Constant.REQ_QR_CODE);
+                finish();
+            } else{
+                Intent intent = new Intent(MainActivity.this, activity_qrcode_text.class);
                 intent.putExtra("param",scanResult);
                 startActivityForResult(intent, Constant.REQ_QR_CODE);
                 finish();

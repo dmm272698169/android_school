@@ -5,17 +5,12 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Looper;
-import android.util.Base64;
 import android.util.Log;
 
 import com.dommy.qrcode.sql.SQLiteHelper;
 import com.dommy.qrcode.sql.token;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -107,11 +102,12 @@ public class Util {
     }
     public static Map<String,String> getUser(Context context){
         SharedPreferences sharedPreferences =context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", null);//(key,若无数据需要赋的值)
-        String password = sharedPreferences.getString("password", null);//(key,若无数据需要赋的值)
+        String username = sharedPreferences.getString("username", "");//(key,若无数据需要赋的值)
+        String password = sharedPreferences.getString("password", "");//(key,若无数据需要赋的值)
         Map<String,String> map=new HashMap<>();
         map.put("username",username);
         map.put("password",password);
+        Log.i("map", String.valueOf(map));
         return map;
     }
     //字符转字节
