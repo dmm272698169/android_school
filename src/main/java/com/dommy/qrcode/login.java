@@ -69,32 +69,17 @@ public class login extends AppCompatActivity {
                 if("".equals(account) || "".equals(password)){
                     Util.getToast(login.this,"用户名或密码不能为空");
                 }else {
-                    JSONObject object=new JSONObject();
                     params.put("username",account);
                     params.put("password",password);
                     String content= httpClient.submitPostData("http://www.prowhy.com/api/mobile/login",params,"utf-8");
                     if (content.contains("用户名或密码不正确")) {
                         Util.getToast(login.this,"用户名或密码不正确");
                     } else {
-                        try {
-                            jsonObject=new JSONObject(content);
-//                            Util.deleteDatabse(login.this);
-//                            if(Util.findById(login.this,account)){
-//                                Util.updateSQL(login.this,(String) jsonObject.get("token"),account);
-//                            }else {
-//                                Util.insertSqlLite(login.this,(String) jsonObject.get("token"),account);
-//                            }
-                            Util.saveUser(login.this,account,password);
-                            Util.getUser(login.this);
-                            Log.i("网页信息",jsonObject.get("token").toString());
-                            Intent intent = new Intent(login.this,AliHomeActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("username",account);
-                            startActivityForResult(intent, Constant.REQ_QR_CODE);
-                            finish();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Util.saveUser(login.this,account,password);
+                        Intent intent = new Intent(login.this,AliHomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivityForResult(intent, Constant.REQ_QR_CODE);
+                        finish();
                     }
                 }
             }
